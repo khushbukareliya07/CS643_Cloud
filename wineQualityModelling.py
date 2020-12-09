@@ -17,8 +17,7 @@ spark = SparkSession.builder.getOrCreate()
 
 # Read the data and Print the schema
 print("\n\nThe Program has started...\n\n")
-defTrain = spark.read.format('csv').options(header='true', inferSchema='true', delimiter=';').csv(
-    "s3://myprogrambucket/TrainingDataset.csv")
+traindf = spark_session.read.csv('TrainingDataset.csv',header='true', inferSchema='true', sep=';') 
 
 print("\n\nPrinting Training Schema\n\n")
 defTrain.printSchema()
