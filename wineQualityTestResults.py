@@ -1,5 +1,5 @@
 # import findspark
-# findspark.init()
+# findspark.init:wq()
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 from pyspark.ml.classification import RandomForestClassifier
@@ -9,6 +9,8 @@ from pyspark.mllib.evaluation import MulticlassMetrics
 import sys
 import pyspark.sql.functions as func
 import pyspark
+
+
 if(len(sys.argv) < 3):
     print("Please provide testfilepth")
     sys.exit(-1)
@@ -23,12 +25,11 @@ sc = SparkContext(conf=conf)
 spark = SparkSession.builder.getOrCreate()
 
 rf = RandomForestClassifier.load(modelpath)
-#rf = RandomForestClassifier.load("s3://myprogrambucket/rfwine_model.model")
+
 
 defTest = spark.read.format('csv').options(header='true', inferSchema='true', delimiter=';').csv(testfilepath)
 
-#defTest = spark.read.format('csv').options(header='true', inferSchema='true', delimiter=';').csv(
- #   "s3://myprogrambucket/ValidationDataset.csv")
+
 defTest.printSchema()
 
 featureColumns = [col for col in defTest.columns if (
