@@ -57,4 +57,4 @@ print("\nCompleted Model Training...\n\nRandom Forest RMSE on traning data = %g\
 print("\nRandom Forest RMSE on test data = %g\n" %
         evaluator.evaluate(rfTestPredictions))
 
-rf.save("s3://myprogrambucket/rfwine_model.model")
+rf.save("rfPipelineModel")
